@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import "./App.css";
 import Characters from "./components/Character";
 import { data } from "./mocks/handlers";
 
 const App = () => {
-  const [data, setData] = useState("");
+  //const [data, setData] = useState("");
   const [results, setResults] = useState([]);
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
@@ -14,9 +14,11 @@ const App = () => {
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
   const search = () => {
-    axios.get(`https://swapi.dev/api/people/`)
-      .then((data) => {setResults(data.data)
-     // console.log('axios', data.data)
+    axios
+      .get(`https://swapi.dev/api/people/`)
+      .then((data) => {
+        setResults(data.data);
+        // console.log('axios', data.data)
       })
       .catch((err) => console.error(err));
 
@@ -26,18 +28,15 @@ const App = () => {
   console.log(results);
 
   useEffect(() => {
-    console.log('start');
+    console.log("start");
     search();
-    console.log('end');
+    console.log("end");
   }, []);
 
   return (
     <div className="app">
       <h1>React Wars</h1>
-     <Characters char={results}/>
-      
-  
-        
+      <Characters char={results} />
     </div>
   );
 };
